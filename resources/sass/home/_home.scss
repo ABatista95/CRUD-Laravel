@@ -1,0 +1,32 @@
+/* Layout */
+.container-main {
+    margin-top: 56px;
+    padding: 8px 12px;
+}
+
+/* Rules Media - First Mobile */
+@media only screen and (min-width: 375px) {
+}
+
+@media only screen and (min-width: 576px) {
+    .container-main {
+        padding: 12px 2rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container-main {
+        padding: 12px 4rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container-main {
+        padding: 12px 7rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+}
+
+
