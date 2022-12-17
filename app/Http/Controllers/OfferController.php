@@ -24,18 +24,40 @@ class OfferController extends Controller
      */
     public function create()
     {
-        return view('modules.offers.offers_create');
+        $activitiesList = ['Dato1', 'Dato2', 'Dato3', 'Dato4', 'Dato5', 'Dato6', 'Dato7', 'Dato8', 'Dato9', 'Dato10'];
+        return view('modules.offers.offers_create', compact('activitiesList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        // Para guardar datos.
+        $offer = new Offer();
+        $dataNewOffer = request()->except('_token');
+        $currentDate = date("Y-m-d H:i:s");
+
+        $dataNewOffer['creator'] = 'Usuario';
+        $dataNewOffer['status'] = 1;
+        $dataNewOffer['created_at'] = $currentDate;
+        $dataNewOffer['updated_at'] = $currentDate;
+
+        $result = Offer::insert($dataNewOffer);
+
+        $responseCreate['status'] = "success";
+        $responseCreate['code'] = 200;
+        $responseCreate['message'] = "Succesful transaction";
+
+        if (!$result) {
+            $responseCreate['status'] = "error";
+            $responseCreate['code'] = 500;
+            $responseCreate['message'] = "Unsuccessful transaction";
+        }
+
+        return redirect()->route("offers.show")->with($responseCreate['status'], response()->json($responseCreate)->content());
     }
 
     /**

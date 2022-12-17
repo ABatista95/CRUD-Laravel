@@ -5,6 +5,12 @@
     <i class="fas fa-yin-yang" style="color:red;"></i>
     <div>
         <p>Description</p>
+        @php
+            $creation = "{}";
+            if(Session::get('success')) $creation = Session::get('success');
+            if(Session::get('error')) $creation = Session::get('error');
+        @endphp
+        <input type="hidden" id="responseCreate" value="{{ $creation }}">
     </div>
     <hr>
     <p class="card-text">
@@ -30,8 +36,8 @@
                         <td>{{ $item->creator }}</td>
                         <td>{{ $item->object }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->start_date }}</td>
-                        <td>{{ $item->end_date }}</td>
+                        <td>{{ explode(" ", $item->start_date)[0] }}</td>
+                        <td>{{ explode(" ", $item->end_date)[0] }}</td>
                         <td>{{ $item->status }}</td>
                         <td>Responsable</td>
                         <td>Acciones</td>
@@ -41,4 +47,10 @@
             </table>
         </div>
     </p>
+@endsection
+
+@section("scripts")
+    <script type="text/javascript">
+
+    </script>
 @endsection

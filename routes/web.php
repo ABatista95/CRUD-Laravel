@@ -25,4 +25,7 @@ Route::get('/offers', function () {
 Route::prefix('offers')->group(function () {
     Route::get('create', [OfferController::class, 'create'])->name('offers.create');
     Route::get('show', [OfferController::class, 'show'])->name('offers.show');
+    Route::post('store', [OfferController::class, 'store'])->name('offers.store');
 });
+
+//Route::resource('offers', OfferController::class);
