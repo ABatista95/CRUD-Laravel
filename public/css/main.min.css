@@ -7,6 +7,9 @@ html {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
@@ -363,23 +366,27 @@ video {
 /* Layout */
 .container-main {
   margin-top: 56px;
-  padding: 8px 12px;
+  padding: 8px 12px 2rem;
+}
+
+.footer-main {
+  margin-top: auto;
 }
 
 /* Rules Media - First Mobile */
 @media only screen and (min-width: 576px) {
   .container-main {
-    padding: 12px 2rem;
+    padding: 12px 2rem 2rem;
   }
 }
 @media only screen and (min-width: 992px) {
   .container-main {
-    padding: 12px 4rem;
+    padding: 12px 4rem 2rem;
   }
 }
 @media only screen and (min-width: 1200px) {
   .container-main {
-    padding: 12px 7rem;
+    padding: 12px 15rem 3rem;
   }
 }
 /* Viws Offers - Module */

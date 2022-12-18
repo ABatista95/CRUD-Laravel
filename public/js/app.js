@@ -2224,7 +2224,6 @@ if (inUrlLocation("show")) {
   (function () {
     // Don't go any further down the script if [data-notification] is not set.
     var responseCreate = document.getElementById('responseCreate');
-    console.log('Data obtain: ', responseCreate);
     if (!responseCreate) return false;
     var dataResponseCreate = JSON.parse(responseCreate.value);
     if (dataResponseCreate.code === 200) {

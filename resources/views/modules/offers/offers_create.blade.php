@@ -20,9 +20,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="listProductt" class="form-label">Actividad</label>
+                    <label for="listProduct" class="form-label">Actividad</label>
                     <div class="input-group select-activity">
-                        <select id="listProductt" name="activity_id" class="form-select" aria-describedby="currency-input" required>
+                        <select id="listProduct" name="activity_id" class="form-select" aria-describedby="currency-input" required>
                             <option selected disabled value="">Seleccionar</option>
                             @foreach($activitiesList as $activity)
                                 <option value="{{ $activity->product_id }}">{{ $activity->name }}</option>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-12">
                     <label for="description" class="form-label">Descripción</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3" maxlength="1000" required></textarea>
                     <div class="invalid-feedback">
                         Ingrese una descripción.
                     </div>
@@ -44,7 +44,7 @@
                 <div class="col-md-2">
                     <label for="currency" class="form-label">Moneda</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="currency"><i class="fas fa-file-invoice-dollar"></i></span>
+                        <span class="input-group-text" id="currency_sicon"><i class="fas fa-file-invoice-dollar"></i></span>
                         <select id="currency" name="currency" class="form-select" aria-describedby="currency-input">
                             <option selected data-locale="es-CO" data-currency="COP" data-icon="dollar" value=COP">COP</option>
                             <option data-locale="en-US" data-currency="USD" data-icon="dollar" value="USD">USD</option>
@@ -160,8 +160,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script type="text/javascript">
-        $('#listProductClassess').select2();
         $('#listProduct').select2();
-        $('#listProductt').select2();
+        $('#listProductClassess').select2();
     </script>
 @endsection
