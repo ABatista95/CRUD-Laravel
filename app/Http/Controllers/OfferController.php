@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -24,7 +25,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $activitiesList = ['Dato1', 'Dato2', 'Dato3', 'Dato4', 'Dato5', 'Dato6', 'Dato7', 'Dato8', 'Dato9', 'Dato10'];
+        $activitiesList = Product::all();
         return view('modules.offers.offers_create', compact('activitiesList'));
     }
 

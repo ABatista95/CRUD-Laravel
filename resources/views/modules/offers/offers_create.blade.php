@@ -25,7 +25,7 @@
                         <select id="listProductt" name="activity_id" class="form-select" aria-describedby="currency-input" required>
                             <option selected disabled value="">Seleccionar</option>
                             @foreach($activitiesList as $activity)
-                                <option value="1">{{ $activity }}</option>
+                                <option value="{{ $activity->product_id }}">{{ $activity->name }}</option>
                             @endforeach
                         </select>
                         <span class="input-group-text"><i class="far fa-search"></i></span>

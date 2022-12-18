@@ -18,7 +18,7 @@ class CreateOffersTable extends Migration
 
             $table->string('creator');
             $table->string('object');
-            $table->integer('activity_id');
+            $table->bigInteger('activity_id')->unsigned();
             $table->text('description');
             $table->string('currency');
             $table->integer('budget');
@@ -29,7 +29,9 @@ class CreateOffersTable extends Migration
             $table->integer('status');
 
             $table->timestamps();
+            $table->engine = 'InnoDB';
 
+            $table->foreign('activity_id')->references('product_id')->on('products')->onDelete('cascade');
         });
     }
 
