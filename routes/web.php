@@ -19,10 +19,6 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/offers', function () {
-    return view('modules.offers.offers_home');
-});
-
 Route::prefix('offers')->group(function () {
     Route::get('create', [OfferController::class, 'create'])->name('offers.create');
     Route::get('show', [OfferController::class, 'show'])->name('offers.show');
@@ -35,6 +31,5 @@ Route::prefix('offers')->group(function () {
     Route::post('/filters', [OfferController::class, 'showFilters'])->name('offers.filters');
 
 });
-
 
 //Route::resource('offers', OfferController::class);

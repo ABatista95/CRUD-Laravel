@@ -5,7 +5,6 @@
         $creation = "{}";
         if(Session::get('success')) $creation = Session::get('success');
         if(Session::get('error')) $creation = Session::get('error');
-
     @endphp
     <input type="hidden" id="responseCreate" value="{{ $creation }}">
 
@@ -35,7 +34,6 @@
             <div class="mt-4 d-flex justify-content-end">
                 <button type="submit" class="btn btn-secondary dark:text-white mx-3"><i class="fas fa-search mr-2"></i><span>Buscar</span></button>
                 <a href="{{ route('offers.export') }}" class="btn btn-success dark:text-white"><i class="fas fa-file-excel mr-2"></i><span>Generar Excel</span></a>
-{{--                <button type="button" id="enviarinforme" class="btn btn-success dark:text-white"><i class="fas fa-file-excel mr-2"></i><span>Generar Excel</span></button>--}}
             </div>
         </form>
     </div>
@@ -51,10 +49,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section("scripts")
-    <script type="text/javascript">
-
-    </script>
 @endsection

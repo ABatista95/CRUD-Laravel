@@ -8,8 +8,8 @@
         <th scope="col">Fecha inicio</th>
         <th scope="col">Fecha cierre</th>
         <th scope="col">Estado</th>
-        <th scope="col">Responsable</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">Moneda</th>
+        <th scope="col">Presupuesto</th>
     </tr>
     </thead>
     <tbody>
@@ -19,11 +19,11 @@
             <td>{{ $item->creator }}</td>
             <td>{{ $item->object }}</td>
             <td>{{ $item->description }}</td>
-            <td>{{ explode(" ", $item->start_date)[0] }}</td>
-            <td>{{ explode(" ", $item->end_date)[0] }}</td>
+            <td>{{ $item->start_date }}</td>
+            <td>{{ $item->end_date }}</td>
             <td>{{ $item->statusOffer->name }}</td>
-            <td>Responsable</td>
-            <td>Acciones</td>
+            <td>{{ $item->currency }}</td>
+            <td align="right">{{ number_format($item->budget) }}</td>
         </tr>
     @endforeach
     </tbody>

@@ -44,7 +44,7 @@
                 <div class="col-md-2">
                     <label for="currency" class="form-label">Moneda</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="currency_sicon"><i class="fas fa-file-invoice-dollar"></i></span>
+                        <span class="input-group-text" id="currency_icon"><i class="fas fa-file-invoice-dollar"></i></span>
                         <select id="currency" name="currency" class="form-select" aria-describedby="currency-input">
                             <option selected data-locale="es-CO" data-currency="COP" data-icon="dollar" value="COP">COP</option>
                             <option data-locale="en-US" data-currency="USD" data-icon="dollar" value="USD">USD</option>
@@ -63,8 +63,6 @@
                             maxlength="15"
                             class="form-control form-control--budget"
                             placeholder="Valor"
-                            aria-label="Valor"
-                            aria-describedby="basic-addon1"
                             required>
                         <div class="invalid-feedback">
                             Ingrese un monto.
