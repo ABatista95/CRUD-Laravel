@@ -14,6 +14,8 @@ class CreateOffersTable extends Migration
     public function up()
     {
         Schema::create('offers', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('offer_id');
 
             $table->string('creator');
@@ -26,12 +28,12 @@ class CreateOffersTable extends Migration
             $table->timestamp('end_date');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
-            $table->integer('status');
+            $table->bigInteger('status_id')->unsigned();
 
             $table->timestamps();
-            $table->engine = 'InnoDB';
 
             $table->foreign('activity_id')->references('product_id')->on('products')->onDelete('cascade');
+            $table->foreign('status_id')->references('status_id')->on('offer_statuses')->onDelete('cascade');
         });
     }
 

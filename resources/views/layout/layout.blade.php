@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <title>@yield('titlePage')</title>
 
@@ -54,7 +55,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
+                            <a class="nav-link" href="https://github.com/ABatista95/CRUD-Laravel" target="_blank">Repositorio</a>
                         </li>
                     </ul>
                 </div>

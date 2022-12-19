@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OffersExport;
 use App\Models\Offer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Classes\Search\Offers\OffersSearch;
 
 class OfferController extends Controller
 {
@@ -26,7 +30,8 @@ class OfferController extends Controller
     public function create()
     {
         $activitiesList = Product::all();
-        return view('modules.offers.offers_create', compact('activitiesList'));
+        $currentDate = date("Y-m-d");
+        return view('modules.offers.offers_create', compact('activitiesList', 'currentDate'));
     }
 
     /**
@@ -42,7 +47,7 @@ class OfferController extends Controller
         $currentDate = date("Y-m-d H:i:s");
 
         $dataNewOffer['creator'] = 'Usuario';
-        $dataNewOffer['status'] = 1;
+        $dataNewOffer['status_id'] = 1;
         $dataNewOffer['created_at'] = $currentDate;
         $dataNewOffer['updated_at'] = $currentDate;
 
@@ -69,8 +74,10 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        $data_offers = Offer::all();
-        return view('modules.offers.offers_search', compact('data_offers'));
+        $dataOffers = Offer::all();
+        $totalRecords = Offer::count();
+        $dataPaging = Offer::paginate(15);
+        return view('modules.offers.offers_search', compact('dataOffers', 'dataPaging', 'totalRecords'));
     }
 
     /**
@@ -105,5 +112,54 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         //
+    }
+
+    /**
+     * Report creation the specified resource from storage.
+     *
+     * @param  \App\Models\Offer  $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function exportExcel()
+    {
+        // Query limiters
+        ini_set('memory_limit', '1024');
+        set_time_limit(1000);
+
+        return Excel::download(new OffersExport, 'OffersData.xlsx');
+    }
+
+    /**
+     * Apply filters for the specified resource from storage.
+     *
+     * @param  \App\Models\Offer  $offer
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function showFilters(Request $request)
+    {
+        $query = (new OffersSearch)->filter($request);
+
+        $dataOffers = $query->select(
+            "offer_id",
+            "creator",
+            "object",
+            "activity_id",
+            "description",
+            "currency",
+            "budget",
+            "start_date",
+            "start_time",
+            "end_date",
+            "end_time",
+            "status_id")->get()->map(function ($item) {
+            $item->start_date = Carbon::parse($item->start_date)->format("Y-m-d");
+            $item->end_date = Carbon::parse($item->end_date)->format("Y-m-d");
+            return $item;
+        });
+
+        $totalRecords = $query->count();
+        $dataPaging = Offer::paginate(15);
+
+        return view('modules.offers.offers_search', compact('dataOffers', 'dataPaging', 'totalRecords'));
     }
 }

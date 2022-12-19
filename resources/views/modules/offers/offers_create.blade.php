@@ -46,7 +46,7 @@
                     <div class="input-group">
                         <span class="input-group-text" id="currency_sicon"><i class="fas fa-file-invoice-dollar"></i></span>
                         <select id="currency" name="currency" class="form-select" aria-describedby="currency-input">
-                            <option selected data-locale="es-CO" data-currency="COP" data-icon="dollar" value=COP">COP</option>
+                            <option selected data-locale="es-CO" data-currency="COP" data-icon="dollar" value="COP">COP</option>
                             <option data-locale="en-US" data-currency="USD" data-icon="dollar" value="USD">USD</option>
                             <option data-locale="it-IT" data-currency="EUR" data-icon="euro" value="EUR">EUR</option>
                         </select>
@@ -80,7 +80,7 @@
                         id="start_date"
                         name="start_date"
                         class="form-control"
-                        min="2022-12-01"
+                        min="{{ $currentDate }}"
                         max="2030-12-31"
                         required>
                     <div class="invalid-feedback">
@@ -106,7 +106,7 @@
                         id="end_date"
                         name="end_date"
                         class="form-control"
-                        min="2022-12-01"
+                        min="{{ $currentDate }}"
                         max="2030-12-31"
                         required>
                     <div class="invalid-feedback">

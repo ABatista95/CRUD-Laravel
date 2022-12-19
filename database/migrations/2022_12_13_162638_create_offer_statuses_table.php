@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateOfferStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('offer_statuses', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->id('product_id');
+            $table->id('status_id');
             $table->string('name');
-            $table->bigInteger('class_id')->unsigned();
-
-            $table->foreign('class_id')->references('class_id')->on('product_classes')->onDelete('cascade');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('offer_statuses');
     }
 }

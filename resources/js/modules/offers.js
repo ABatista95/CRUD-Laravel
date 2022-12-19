@@ -1,3 +1,18 @@
+
+import OffersServices from "../Services/OffersServices";
+
+let OX = new OffersServices;
+
+document.getElementById('enviarinforme').addEventListener('click', () => {
+    console.log('Lo llama')
+});
+
+(async () => {
+    let resp = await OX.exportOffersExcel({
+        status_id: 1,
+    })
+} )();
+
 function inUrlLocation(ruta){
     let url_pathname = window.location.pathname.split("/")
     if(ruta === "inicio" || ruta === "home") {

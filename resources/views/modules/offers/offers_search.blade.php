@@ -1,52 +1,56 @@
 @extends('layout.layout')
 @section('titlePage', 'CRUD - Buscar Ofertas')
 @section('content')
-    <h1>Search Offers</h1>
-    <i class="fas fa-yin-yang" style="color:red;"></i>
-    <div>
-        <p>Description</p>
-        @php
-            $creation = "{}";
-            if(Session::get('success')) $creation = Session::get('success');
-            if(Session::get('error')) $creation = Session::get('error');
-        @endphp
-        <input type="hidden" id="responseCreate" value="{{ $creation }}">
+    @php
+        $creation = "{}";
+        if(Session::get('success')) $creation = Session::get('success');
+        if(Session::get('error')) $creation = Session::get('error');
+
+    @endphp
+    <input type="hidden" id="responseCreate" value="{{ $creation }}">
+
+    <h1>Consulta de procesos</h1>
+    <div class="px-2 mb-4 px-md-3">
+        <form action="{{ route('offers.filters') }}" method="POST">
+            @csrf
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="object" class="form-label">Objeto</label>
+                    <input type="text" name="object" id="object" class="form-control" placeholder="Identificador de objeto">
+                </div>
+                <div class="col-md-5">
+                    <label for="description" class="form-label">Descripción</label>
+                    <input type="text" name="description" id="description" class="form-control" placeholder="Descripción de oferta">
+                </div>
+                <div class="col-md-3">
+                    <label for="status_id" class="form-label">Estado</label>
+                    <select name="status_id" id="status_id" class="form-select">
+                        <option value="" selected>Todos</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Publicado</option>
+                        <option value="3">Evaluación</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 d-flex justify-content-end">
+                <button type="submit" class="btn btn-secondary dark:text-white mx-3"><i class="fas fa-search mr-2"></i><span>Buscar</span></button>
+                <a href="{{ route('offers.export') }}" class="btn btn-success dark:text-white"><i class="fas fa-file-excel mr-2"></i><span>Generar Excel</span></a>
+{{--                <button type="button" id="enviarinforme" class="btn btn-success dark:text-white"><i class="fas fa-file-excel mr-2"></i><span>Generar Excel</span></button>--}}
+            </div>
+        </form>
     </div>
+    <span>Total procesos / ofertas: <b>{{ $totalRecords }}</b></span>
     <hr>
-    <p class="card-text">
+    <div class="card-text">
         <div class="table table-responsive px-1">
-            <table class="table table-sm table-abordered">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Ronda</th>
-                        <th scope="col">Objeto</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Fecha inicio</th>
-                        <th scope="col">Fecha cierre</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Responsable</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach($data_offers as $item)
-                    <tr>
-                        <th scope="row">{{ $item->offer_id }}</th>
-                        <td>{{ $item->creator }}</td>
-                        <td>{{ $item->object }}</td>
-                        <td>{{ $item->description }}</td>
-                        <td>{{ explode(" ", $item->start_date)[0] }}</td>
-                        <td>{{ explode(" ", $item->end_date)[0] }}</td>
-                        <td>{{ $item->status }}</td>
-                        <td>Responsable</td>
-                        <td>Acciones</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            @include('modules.offers.components.offers_table', $dataOffers)
         </div>
-    </p>
+        <div class="row">
+            <div class="col-sm-12">
+                {{ $dataPaging->links() }}
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section("scripts")

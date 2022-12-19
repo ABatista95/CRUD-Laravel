@@ -29,4 +29,22 @@ class Offer extends Model
       'created_at',
       'updated_at',
     ];
+
+    /**
+     * State relationship with offers of the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function statusOffer() {
+        return $this->belongsTo(OfferStatus::class, "status_id", "status_id");
+    }
+
+    /**
+     * Data related to the activities of the specified storage resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activityOffer() {
+        return $this->belongsTo(Product::class, "activity_id", "product_id");
+    }
 }
